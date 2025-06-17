@@ -10,7 +10,8 @@ The API call is in this format
     5. sort: default by "HourUTC DESC"
 The datetime format for [end] and [start] - valid format: yyyy, yyyy-MM, yyyy-MM-dd, yyyy-MM-ddTHH:mm.
 After checking the API, I know that the response if in this format, that we need to know to code the model
-Data response
+
+<details> <summary><strong>Data response</strong></summary>
 {
 "total": 358240,
 "sort": "HourUTC DESC",
@@ -49,6 +50,7 @@ Data response
     },
 ]
 }
+</details>
 
 2. Data type of properties / attributes
 Checking the meta data in this  meta API https://api.energidataservice.dk/meta/dataset/ProductionConsumptionSettlement
@@ -93,10 +95,13 @@ then based on those values, will make another real call to get the real data (5 
 - Run by .\gradlew.bat run 
 
 When run, data is calculated, and save to a file in data folder every 1 minute, example of data saved as in \data\averages\20250617\averages.csv
+
+<details> <summary><strong>Example data in csv file</strong></summary>
 runtime,timestamp,CentralPowerMWh,LocalPowerMWh,CommercialPowerMWh
 2025-06-17T16:18,2025-06-08T06:00,23.051769999999998,52.6545175,57.007275
 2025-06-17T16:19,2025-06-08T06:00,23.051769999999998,52.6545175,57.007275
 2025-06-17T16:37,2025-06-08T06:00,23.051769999999998,52.6545175,57.007275
 2025-06-17T16:43,2025-06-08T06:00,23.051769999999998,52.6545175,57.007275
+</details>
 
 Chart: is using xchart, and example is "data\example_chart.png"
