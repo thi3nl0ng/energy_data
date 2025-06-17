@@ -13,43 +13,44 @@ After checking the API, I know that the response if in this format, that we need
 
 <details> <summary><strong>Data response</strong></summary>
 {
-"total": 358240,
-"sort": "HourUTC DESC",
-"limit": 100,
-"dataset": "ProductionConsumptionSettlement",
-"records": [
+  "total": 358240,
+  "sort": "HourUTC DESC",
+  "limit": 100,
+  "dataset": "ProductionConsumptionSettlement",
+  "records": [
     {
-        "HourUTC": "2025-06-06T04:00:00",
-        "HourDK": "2025-06-06T06:00:00",
-        "PriceArea": "DK1",
-        "CentralPowerMWh": 5.108670,
-        "LocalPowerMWh": 95.071576,
-        "CommercialPowerMWh": 63.143923,
-        "LocalPowerSelfConMWh": 52.683792,
-        "OffshoreWindLt100MW_MWh": 110.087382,
-        "OffshoreWindGe100MW_MWh": 453.699088,
-        "OnshoreWindLt50kW_MWh": 1.320471,
-        "OnshoreWindGe50kW_MWh": 503.008770,
-        "HydroPowerMWh": 1.202952,
-        "SolarPowerLt10kW_MWh": 1.766157,
-        "SolarPowerGe10Lt40kW_MWh": 0.357542,
-        "SolarPowerGe40kW_MWh": 58.275288,
-        "SolarPowerSelfConMWh": 3.152441,
-        "UnknownProdMWh": 0.594790,
-        "ExchangeNO_MWh": -243.407600,
-        "ExchangeSE_MWh": 605.672000,
-        "ExchangeGE_MWh": 1560.030000,
-        "ExchangeNL_MWh": 1.611000,
-        "ExchangeGB_MWh": -986.425988,
-        "ExchangeGreatBelt_MWh": -0.300000,
-        "GrossConsumptionMWh": 2286.652254,
-        "GridLossTransmissionMWh": 67.555762,
-        "GridLossInterconnectorsMWh": 8.446600,
-        "GridLossDistributionMWh": 68.872520,
-        "PowerToHeatMWh": 65.256634
-    },
-]
+      "HourUTC": "2025-06-06T04:00:00",
+      "HourDK": "2025-06-06T06:00:00",
+      "PriceArea": "DK1",
+      "CentralPowerMWh": 5.108670,
+      "LocalPowerMWh": 95.071576,
+      "CommercialPowerMWh": 63.143923,
+      "LocalPowerSelfConMWh": 52.683792,
+      "OffshoreWindLt100MW_MWh": 110.087382,
+      "OffshoreWindGe100MW_MWh": 453.699088,
+      "OnshoreWindLt50kW_MWh": 1.320471,
+      "OnshoreWindGe50kW_MWh": 503.008770,
+      "HydroPowerMWh": 1.202952,
+      "SolarPowerLt10kW_MWh": 1.766157,
+      "SolarPowerGe10Lt40kW_MWh": 0.357542,
+      "SolarPowerGe40kW_MWh": 58.275288,
+      "SolarPowerSelfConMWh": 3.152441,
+      "UnknownProdMWh": 0.594790,
+      "ExchangeNO_MWh": -243.407600,
+      "ExchangeSE_MWh": 605.672000,
+      "ExchangeGE_MWh": 1560.030000,
+      "ExchangeNL_MWh": 1.611000,
+      "ExchangeGB_MWh": -986.425988,
+      "ExchangeGreatBelt_MWh": -0.300000,
+      "GrossConsumptionMWh": 2286.652254,
+      "GridLossTransmissionMWh": 67.555762,
+      "GridLossInterconnectorsMWh": 8.446600,
+      "GridLossDistributionMWh": 68.872520,
+      "PowerToHeatMWh": 65.256634
+    }
+  ]
 }
+
 </details>
 
 2. Data type of properties / attributes
@@ -72,12 +73,13 @@ B. Solution
 - Provide a simple chart based on that result
 - Set up configuration in file for robust and dynamic. The attributes for computing average are also configurable
 - I use a param dataBuffer to temporally store, not database. In real context, can have other methods
-- 
+
+
 - Attention/Note: 
   1. Timezone (datetime) in the data is in UTC (the string value is without "Z" at the ending)
   2. The datetime of data is not realtime, mean, when we try to get the date without any filter (17.06.2025, latest data is 08.06.2025), it is like 8/9 days ahead
   so get the last 5 minutes data mean from the HourUTC   
-  3. Because of limitation of time, I do not organize the code perfectly, optimize or write test and add log and error handling
+  3. Because of limitation of time, I do not organize the code perfectly, deal with number precision, optimize or write test and add log and error handling
 
 3. How: when the task runs, it just gets the first row to get the latest updated time, then set cut off to 5 minutes, 
 then based on those values, will make another real call to get the real data (5 minutes update data)
